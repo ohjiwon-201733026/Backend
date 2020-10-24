@@ -25,7 +25,7 @@ public class StudentController {
 	@RequestMapping("list")
 	public String list(Model model) {
 		List<Student> students=studentMapper.findAll();
-		model.addAttribute(students);
+		model.addAttribute("students",students);
 		
 		return "student/list";
 	}
@@ -34,10 +34,10 @@ public class StudentController {
 	public String create(Model model) {
 		Student student=new Student();
 		List<Department> departments=departmentMapper.findAll();
-		model.addAttribute(student);
-		model.addAttribute(departments);
+		model.addAttribute("student",student);
+		model.addAttribute("departments",departments);
 		
-		return "student/create";
+		return "student/edit";
 	}
 	
 	@PostMapping("create")

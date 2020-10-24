@@ -22,7 +22,7 @@ public interface StudentMapper {
 	@Select("SELECT s.*,departmentName FROM student s LEFT JOIN department d ON s.departmentId=d.id")
 	List<Student> findAll();
 	
-	@Insert("INSERT Student(studentNumber,name, departmentId, year) VALUES(#{studentNumber},#{name},#{departmentId},#{year}")
+	@Insert("INSERT Student(studentNumber,name, departmentId, year) VALUES(#{studentNumber},#{name},#{departmentId},#{year})")
 	@Options(useGeneratedKeys=true, keyProperty="id")
 	void insert(Student student);
 	
