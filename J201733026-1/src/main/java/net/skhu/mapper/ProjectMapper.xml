@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.skhu.mapper.ProjectMapper">
+	<select id="findByProjectId"
+		resultMap="projectWithAssignmentWithEngineer">
+		select p.*, a.projectId, a. engineerId, e.id engineerId, e. employeeNo,
+		e.name, e.roleId, e.phone, e.sex, e.email
+		from project p join assignment a on p.id=a.projectId
+		join engineer e on a.engineerId=e.id
+		where p.id=1
+	</select>
+	<resultMap id="projectWithAssignmentWithEngineer"
+		type="net.skhu.dto.Project">
+		<id property="id" column="projectId" />
+		<result property="title" column="title" />
+		<result property="managerId" column="maangerId" />
+		<result property="progress" column="progress" />
+		<result property="priority" column="priority" />
+
+		<collection property="assignments"
+			ofType="net.skhu.dto.Assignment">
+			<id property="id" column="id" />
+			<result property="projectId" column="projectId" />
+			<result property="engineerId" column="engineerId" />
+			<association property="engineer"
+				javaType="net.skhu.dto.Engineer">
+				<id property="id" column="engineerId" />
+				<result property="employeeNo" column="employeeNo" />
+				<result property="name" column="name" />
+				<result property="roleId" column="roleId" />
+				<result property="phone" column="phone" />
+				<result property="sex" column="sex" />
+				<result property="email" column="email" />
+			</association>
+		</collection>
+
+	</resultMap>
+</mapper>
